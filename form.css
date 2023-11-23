@@ -1,0 +1,210 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+body {
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+
+.header {
+    text-align: center;
+    font-size: 15px;
+    align-items: center;
+    background-color: #FF0000;
+    color: #fff;
+}
+
+.form {
+  max-width: 1200px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  border: 3px solid #003366;
+}
+
+.center{
+    border: solid #003366;
+    border-width: 5px;
+}
+
+hr {
+    border: none; /* Remove the default border */
+    height: 30px; /* Set the height of the line */
+    background-color: #003366; /* Change the color (you can use any color you prefer) */
+    margin: 20px 0; /* Add margin for spacing above and below the line */
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="radio"],
+select {
+  padding: 5px;
+  margin-bottom: 15px;
+  border: 2px solid #003366;
+  border-radius: 5px;
+  background-color: #F1F4FF;
+  font-weight: bolder;
+  font-size: medium;
+}
+
+.Fullname {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    border: solid #003366;
+    border-radius: 15px;
+}
+
+.fullname {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.fullname .padding {
+    padding: 0 30px;
+    font-size: large; 
+}
+
+.Address {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    border: solid #003366;
+    border-radius: 15px;
+}
+.Businessadd{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.address , .businessadd {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.address .info  , .businessadd .info {
+    padding: 0 30px;
+    font-size: large; 
+}
+
+.Information , .Minformation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.information {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.information .info , .minformation .info {
+    padding: 0 30px;
+    font-size: large; 
+}
+
+.minformation {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.center {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+    padding-bottom: 25px;
+    padding-top: 25px;
+  }
+  
+  .checkbox-container {
+    flex: 0 0 20%;
+    margin: 5px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+  }
+
+  .checkbox-container input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;    
+    height: 20px;
+    background-color: #ffffff; /* Color for the checkbox */
+    border: 3px solid #003366; /* Border color for the checkbox */
+    border-radius: 3px;
+    outline: none;
+    margin-right: 5px;
+  }
+
+  .checkbox-container input[type="checkbox"]:checked {
+    background-color: #ff0000; /* Background color when checked */
+    border-color: #000000; /* Border color when checked */
+  }
+
+
+.Blood {
+    display: flex;
+    margin-bottom: 50px;
+
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Birthplace {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    
+}
+.birthplace {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.birthplace .info {
+    padding: 0 30px;
+    
+}
+
+.Employer{
+  border: solid #003366;
+  border-radius: 15px;
+}
+  
+  .employer {
+    display: flex;
+    flex-wrap: nowrap;
+    height: auto; 
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+  }
+
+  .employer .column {
+    flex: 0 0 40%;
+    margin: 10px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+  }
