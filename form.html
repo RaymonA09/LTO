@@ -411,15 +411,16 @@ function toggleTextbox1() {
     var radioButtons = document.querySelectorAll('input[type="radio"][name^="H"], input[type="radio"][name="B"], input[type="radio"][name="C1"], input[type="radio"][name="C2"], input[type="radio"][name="D"], input[type="radio"][name="F"], input[type="radio"][name="G"]');
 
     // Add an event listener to the "A. NEW" radio button
-    radioButtonA.addEventListener("change", function () {
-        // If "A. NEW" is selected, unselect "E. RENEWAL" if it was selected
+    radioButtonA.addEventListener("change", function() {
         if (radioButtonA.checked) {
-            radioButtonE.checked = false;
-            
-            // Uncheck all other radio buttons
-            radioButtons.forEach(function (radioButton) {
-                radioButton.checked = false;
+            // Disable all other buttons except E when A is checked
+            radioButtons.forEach(function(radioButton) {
+                if (radioButton.name !== "E") {
+                    radioButton.checked = false;
+                    radioButton.disabled = true;
+                }
             });
+            radioButtonE.disabled = false; // Ensure E is always enabled
         }
     });
 

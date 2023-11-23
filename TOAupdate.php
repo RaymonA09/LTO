@@ -19,8 +19,7 @@ if (isset($_GET['userid'])) {
     $userid = $_GET['userid'];
     $_SESSION['editUserID'] = $userid;
 
-    // Debugging: Display the User ID
-    echo "UserID: " . $userid . "<br>";
+
 
     $sql = "SELECT AD.* FROM APPLICATION_DETAILS AD JOIN USER_DATA UD ON AD.USERID = UD.USERID WHERE AD.USERID = ?";
     $params = array($userid);
@@ -30,9 +29,7 @@ if (isset($_GET['userid'])) {
     }
 
 
-    var_dump($stmt);
     $appData = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-    var_dump($appData);
     
     error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -55,42 +52,13 @@ function set_checked($currentValue, $array, $key) {
     <link rel="stylesheet" type="text/css" href="form.css">
 
     <title>Edit Application for Driver's License</title>
-<script type="text/javascript">
-// Get references to the radio buttons for "A. NEW" and "E. RENEWAL"
-var radioButtonA = document.getElementById("A");
-    var radioButtonE = document.getElementById("E");
-
-    // Get references to all the other radio buttons
-    var radioButtons = document.querySelectorAll('input[type="radio"][name^="H"], input[type="radio"][name="B"], input[type="radio"][name="C1"], input[type="radio"][name="C2"], input[type="radio"][name="D"], input[type="radio"][name="F"], input[type="radio"][name="G"]');
-
-    // Add an event listener to the "A. NEW" radio button
-    radioButtonA.addEventListener("change", function () {
-        // If "A. NEW" is selected, unselect "E. RENEWAL" if it was selected
-        if (radioButtonA.checked) {
-            radioButtonE.checked = false;
-            
-            // Uncheck all other radio buttons
-            radioButtons.forEach(function (radioButton) {
-                radioButton.checked = false;
-            });
-        }
-    });
-
-    // Add an event listener to the "E. RENEWAL" radio button
-    radioButtonE.addEventListener("change", function () {
-        // If "E. RENEWAL" is selected, unselect "A. NEW" if it was selected
-        if (radioButtonE.checked) {
-            radioButtonA.checked = false;
-        }
-    });
-</script>
-
-
-
 </head>
 
 <body>
 <section class="form" style = "margin-top: 1%";>
+
+<form action="TOAupdated.php" method="post">
+
 
 <div>
 <h3 class="center" style="margin-bottom: 10px; margin-top: 30px; background-color: #003366; color: white;"> TYPE OF APPLICATION(TOA)</h3> 
@@ -180,10 +148,54 @@ var radioButtonA = document.getElementById("A");
     <label for="H6" style="text-align: center;">OTHERS</label>
 </div>
 
+<!-- Submit Button -->
+<div class="checkbox-container">
+                    <input type="submit" value="Update TOA">
+                </div>
+
 
 </div>
 </div>
+</form>
 
 </section>
+
+<script type="text/javascript">
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Get references to the radio buttons for "A. NEW" and "E. RENEWAL"
+    var radioButtonA = document.getElementById("A");
+    var radioButtonE = document.getElementById("E");
+
+    // Get references to all the other radio buttons
+    var radioButtons = document.querySelectorAll('input[type="radio"][name^="H"], input[type="radio"][name="B"], input[type="radio"][name="C1"], input[type="radio"][name="C2"], input[type="radio"][name="D"], input[type="radio"][name="F"], input[type="radio"][name="G"]');
+
+    // Add an event listener to the "A. NEW" radio button
+    radioButtonA.addEventListener("change", function() {
+        if (radioButtonA.checked) {
+            // Disable all other buttons except E when A is checked
+            radioButtons.forEach(function(radioButton) {
+                if (radioButton.name !== "E") {
+                    radioButton.checked = false;
+                    radioButton.disabled = true;
+                }
+            });
+            radioButtonE.disabled = false; // Ensure E is always enabled
+        }
+    });
+
+    // Add an event listener to the "E. RENEWAL" radio button
+    radioButtonE.addEventListener("change", function() {
+        if (radioButtonE.checked) {
+            radioButtonA.checked = false;
+            // Re-enable all other buttons when E is checked
+            radioButtons.forEach(function(radioButton) {
+                radioButton.disabled = false;
+            });
+        }
+    });
+});
+
+</script>
 </body>
 </html>

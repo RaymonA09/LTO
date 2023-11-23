@@ -1,22 +1,24 @@
 <?php
-        $serverName = "LAPTOP-50DT4DQ6\SQLEXPRESS";
-        $connectionOptions = [
-            "Database" => "WEBAPP",
-            "Uid" => "",
-            "PWD" => ""
-        ];
+    $serverName = "LAPTOP-50DT4DQ6\SQLEXPRESS";
+    $connectionOptions = [
+        "Database" => "WEBAPP",
+        "Uid" => "",
+        "PWD" => ""
+    ];
 
+    $conn = sqlsrv_connect($serverName, $connectionOptions);
+    if ($conn == false) {
+        die(print_r(sqlsrv_errors(), true));
+    }
 
-        $conn = sqlsrv_connect($serverName, $connectionOptions);
-        if($conn == false){
-            die(print_r(sqlsrv_error(), true));
-        }
-
-        $sql = "SELECT LASTNAME, FIRSTNAME FROM USER_DATA WHERE USERID = (SELECT IDENT_CURRENT('USER_DATA'))";
-        $result = sqlsrv_query($conn, $sql);
-        $userID = sqlsrv_fetch_array($result);
-
-    ?>
+    // Fetching the latest user's details including USERID
+    $sql = "SELECT USERID, LASTNAME, FIRSTNAME FROM USER_DATA WHERE USERID = (SELECT IDENT_CURRENT('USER_DATA'))";
+    $result = sqlsrv_query($conn, $sql);
+    if ($result === false) {
+        die(print_r(sqlsrv_errors(), true));
+    }
+    $userID = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+?>
 
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
@@ -82,7 +84,7 @@
     <div class="card">
         <h2>Welcome, <?php echo $userID['FIRSTNAME']; ?> <?php echo $userID['LASTNAME']; ?></h2>
         <button><a href="Registerget.php">View my records</a></button>
-        <button><a href="TOAupdate.php">Change Application Details</a></button>
+        <button><a href="TOAupdate.php?userid=<?php echo urlencode($userID['USERID']); ?>">Change Application Details</a></button>
     </div>
 </body>
   </body>
