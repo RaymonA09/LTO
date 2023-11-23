@@ -403,34 +403,33 @@ function toggleTextbox1() {
     
 }
 
-// Get references to the radio buttons for "A. NEW" and "E. RENEWAL"
+document.addEventListener("DOMContentLoaded", function() {
     var radioButtonA = document.getElementById("A");
     var radioButtonE = document.getElementById("E");
 
-    // Get references to all the other radio buttons
     var radioButtons = document.querySelectorAll('input[type="radio"][name^="H"], input[type="radio"][name="B"], input[type="radio"][name="C1"], input[type="radio"][name="C2"], input[type="radio"][name="D"], input[type="radio"][name="F"], input[type="radio"][name="G"]');
 
-    // Add an event listener to the "A. NEW" radio button
     radioButtonA.addEventListener("change", function() {
         if (radioButtonA.checked) {
-            // Disable all other buttons except E when A is checked
+            radioButtonE.checked = false; // Uncheck E when A is checked
             radioButtons.forEach(function(radioButton) {
-                if (radioButton.name !== "E") {
-                    radioButton.checked = false;
-                    radioButton.disabled = true;
-                }
+                radioButton.checked = false;
+                radioButton.disabled = true;
             });
             radioButtonE.disabled = false; // Ensure E is always enabled
         }
     });
 
-    // Add an event listener to the "E. RENEWAL" radio button
-    radioButtonE.addEventListener("change", function () {
-        // If "E. RENEWAL" is selected, unselect "A. NEW" if it was selected
+    radioButtonE.addEventListener("change", function() {
         if (radioButtonE.checked) {
             radioButtonA.checked = false;
+            radioButtons.forEach(function(radioButton) {
+                radioButton.disabled = false;
+            });
         }
     });
+});
+
 
 
 
